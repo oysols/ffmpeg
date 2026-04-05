@@ -715,7 +715,7 @@ pub fn build(b: *std.Build) void {
         .CONFIG_SMALL = optimize == .ReleaseSmall,
         .CONFIG_STATIC = true,
         .CONFIG_SWSCALE_ALPHA = true,
-        .CONFIG_GPL = false,
+        .CONFIG_GPL = true,
         .CONFIG_NONFREE = false,
         .CONFIG_VERSION3 = false,
         .CONFIG_AVDEVICE = true,
