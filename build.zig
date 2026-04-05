@@ -69,31 +69,6 @@ pub fn build(b: *std.Build) void {
         .X264_INTERLACED = true,
         .X264_BIT_DEPTH = 8,
         .X264_CHROMA_FORMAT = 0,
-        .X264_BUILD = 164,
-
-        .HAVE_MMX = have_x86_feat(t, .mmx),
-        .HAVE_MMX2 = have_x86_feat(t, .mmx),
-        .HAVE_SSE = have_x86_feat(t, .sse),
-        .HAVE_SSE2 = have_x86_feat(t, .sse2),
-        .HAVE_SSE3 = have_x86_feat(t, .sse3),
-        .HAVE_SSSE3 = have_x86_feat(t, .ssse3),
-        .HAVE_SSE4 = have_x86_feat(t, .sse4_1),
-        .HAVE_SSE42 = have_x86_feat(t, .sse4_2),
-        .HAVE_AVX = have_x86_feat(t, .avx),
-        .HAVE_AVX2 = have_x86_feat(t, .avx2),
-        .HAVE_FMA3 = have_x86_feat(t, .fma),
-        .HAVE_CMOV = have_x86_feat(t, .cmov),
-
-        .HAVE_THREAD = true,
-        .HAVE_STDC_PURE_C = true,
-
-        .ARCH_X86 = t.cpu.arch.isX86(),
-        .ARCH_X86_64 = t.cpu.arch == .x86_64,
-
-        .HAVE_BITDEPTH8 = true,
-        .HAVE_BITDEPTH10 = true,
-        .HIGH_BIT_DEPTH = false,
-        .BIT_DEPTH = 8,
     });
     lib.root_module.addConfigHeader(x264_config_h);
 
