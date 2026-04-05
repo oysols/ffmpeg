@@ -564,7 +564,7 @@ pub fn build(b: *std.Build) void {
         .CONFIG_LIBDVDREAD = false,
         .CONFIG_LIBRUBBERBAND = false,
         .CONFIG_LIBVIDSTAB = false,
-        .CONFIG_LIBX264 = false,
+        .CONFIG_LIBX264 = true,
         .CONFIG_LIBX265 = false,
         .CONFIG_LIBXAVS = false,
         .CONFIG_LIBXAVS2 = false,
