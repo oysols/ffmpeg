@@ -59,7 +59,6 @@ pub fn build(b: *std.Build) void {
     lib.root_module.linkLibrary(libogg_dep.artifact("ogg"));
     lib.root_module.linkLibrary(libx264_dep.artifact("x264"));
     lib.root_module.addIncludePath(b.path("."));
-    lib.root_module.addIncludePath(b.path("libx264"));
 
     const x264_config_h = b.addConfigHeader(.{
         .style = .blank,
