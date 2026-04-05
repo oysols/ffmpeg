@@ -36,6 +36,10 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
+    const libx264_dep = b.dependency("libx264", .{
+        .target = target,
+        .optimize = optimize,
+    });
 
     const omit_frame_pointer = false;
     const pic = true;
@@ -53,7 +57,45 @@ pub fn build(b: *std.Build) void {
     lib.root_module.linkLibrary(libmp3lame_dep.artifact("mp3lame"));
     lib.root_module.linkLibrary(libvorbis_dep.artifact("vorbis"));
     lib.root_module.linkLibrary(libogg_dep.artifact("ogg"));
+    lib.root_module.linkLibrary(libx264_dep.artifact("x264"));
     lib.root_module.addIncludePath(b.path("."));
+    lib.root_module.addIncludePath(b.path("libx264"));
+
+    const x264_config_h = b.addConfigHeader(.{
+        .style = .blank,
+        .include_path = "x264_config.h",
+    }, .{
+        .X264_GPL = true,
+        .X264_INTERLACED = true,
+        .X264_BIT_DEPTH = 8,
+        .X264_CHROMA_FORMAT = 0,
+        .X264_BUILD = 164,
+
+        .HAVE_MMX = t.cpu.arch.isX86(),
+        .HAVE_MMX2 = t.cpu.arch.isX86(),
+        .HAVE_SSE = t.cpu.arch.isX86(),
+        .HAVE_SSE2 = t.cpu.arch.isX86(),
+        .HAVE_SSE3 = fastUnalignedLoads(t),
+        .HAVE_SSSE3 = fastUnalignedLoads(t),
+        .HAVE_SSE4 = fastUnalignedLoads(t),
+        .HAVE_SSE42 = fastUnalignedLoads(t),
+        .HAVE_AVX = fastUnalignedLoads(t),
+        .HAVE_AVX2 = fastUnalignedLoads(t),
+        .HAVE_FMA3 = fastUnalignedLoads(t),
+        .HAVE_CMOV = fastUnalignedLoads(t),
+
+        .HAVE_THREAD = true,
+        .HAVE_STDC_PURE_C = true,
+
+        .ARCH_X86 = t.cpu.arch.isX86(),
+        .ARCH_X86_64 = t.cpu.arch == .x86_64,
+
+        .HAVE_BITDEPTH8 = true,
+        .HAVE_BITDEPTH10 = true,
+        .HIGH_BIT_DEPTH = false,
+        .BIT_DEPTH = 8,
+    });
+    lib.root_module.addConfigHeader(x264_config_h);
 
     const avconfig_h = b.addConfigHeader(.{
         .style = .blank,
@@ -4349,7 +4391,7 @@ const all_sources = [_][]const u8{
     //"libavcodec/libwebpenc.c",
     //"libavcodec/libwebpenc_animencoder.c",
     //"libavcodec/libwebpenc_common.c",
-    //"libavcodec/libx264.c",
+    "libavcodec/libx264.c",
     //"libavcodec/libx265.c",
     //"libavcodec/libxavs.c",
     //"libavcodec/libxavs2.c",

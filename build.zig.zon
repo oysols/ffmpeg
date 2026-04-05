@@ -38,6 +38,10 @@
             .hash = "libogg-1.3.6-4-ZBKq7YwWAgCGiqoGpk1Hj1IuaYf84q9EV-tns7cuFjTq",
         },
 
+        .libx264 = .{
+            .path = "libx264",
+        },
+
         // This is used to compile some assembly files into object files for x86.
         // Without this, ffmpeg considers the build "crippled".
         .nasm = .{
