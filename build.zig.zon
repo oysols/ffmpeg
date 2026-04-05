@@ -39,7 +39,8 @@
         },
 
         .libx264 = .{
-            .path = "libx264",
+            .url = "https://github.com/oysols/x264/archive/41ecd305a2186a158c1e8ccaf6192337412422db.tar.gz",
+            .hash = "x264-164.0.0-Z95iiuaNSgCPMXHsUGJrg2QNFAodKh_JINrxzq89yKbw",
         },
 
         // This is used to compile some assembly files into object files for x86.
